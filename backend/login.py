@@ -118,4 +118,8 @@ def update_user_manager_status(user_id: int, request: UpdateUserRequest, token: 
             conn.commit()
             if cur.rowcount == 0:
                 raise HTTPException(status_code=404, detail="User not found")
-            return {"id": user_id, "manager": request.manager}
+            cur.execute("SELECT id, username, manager FROM users WHERE id = %s", (user_id,))
+            user = cur.fetchone()
+            if user is None:
+                raise HTTPException(status_code=404, detail="User not found")
+            return {"id": user[0], "username": user[1], "manager": user[2]}

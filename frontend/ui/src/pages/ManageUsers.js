@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ManageUsers.css';
 
 function ManageUsers() {
   const [users, setUsers] = useState([]);
@@ -32,8 +33,8 @@ function ManageUsers() {
     })
       .then(response => response.json())
       .then(data => {
-        setUsers([...users, data]);
         setNewUser({ username: '', password: '', manager: false });
+        fetchUsers(); // Refetch users after creating a new user
       })
       .catch(error => console.error('Error creating user:', error));
   };
@@ -47,7 +48,7 @@ function ManageUsers() {
     })
       .then(response => {
         if (response.ok) {
-          setUsers(users.filter(user => user.id !== userId));
+          fetchUsers(); // Refetch users after deleting a user
         } else {
           console.error('Error deleting user:', response.statusText);
         }
@@ -65,14 +66,14 @@ function ManageUsers() {
       body: JSON.stringify({ manager: managerStatus })
     })
       .then(response => response.json())
-      .then(data => {
-        setUsers(users.map(user => (user.id === userId ? data : user)));
-      })
-      .catch(error => console.error('Error updating manager status:', error));
+      .catch(error => console.error('Error updating manager status:', error))
+      .finally(() => {
+        fetchUsers(); // Refetch users after updating manager status
+      });
   };
 
   return (
-    <div>
+    <div className="manage-users-container">
       <h2>Manage Users</h2>
       <div>
         <input
@@ -110,8 +111,8 @@ function ManageUsers() {
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.manager ? 'Yes' : 'No'}</td>
-              <td>
-                <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+              <td className="action-buttons">
+                <button className="delete-button" onClick={() => handleDeleteUser(user.id)}>Delete</button>
                 <button onClick={() => handleUpdateManagerStatus(user.id, !user.manager)}>
                   {user.manager ? 'Revoke Manager' : 'Make Manager'}
                 </button>

@@ -75,10 +75,11 @@ function App() {
           <h1>SCIFC Events Registration</h1>
           <p>Your Event Management System</p>
           <nav>
-            <Link to="/">Home</Link> | <Link to="/create">Create Event</Link> | 
-            {isManager && <Link to="/approve">Approve Events</Link>} | 
-            {isManager && <Link to="/manage-users">Manage Users</Link>} | {/* Add the new tab */}
-            {isLoggedIn ? <button onClick={handleLogout}>Logout</button> : <Link to="/login">Login</Link>}
+            <Link to="/" className="nav-button">Home</Link>
+            <Link to="/create" className="nav-button">Create Event</Link>
+            {isManager && <Link to="/approve" className="nav-button">Approve Events</Link>}
+            {isManager && <Link to="/manage-users" className="nav-button">Manage Users</Link>}
+            {isLoggedIn ? <button onClick={handleLogout} className="nav-button">Logout</button> : <Link to="/login" className="nav-button">Login</Link>}
           </nav>
         </header>
         <main>
@@ -122,7 +123,7 @@ function App() {
             } />
             <Route path="/create" element={isLoggedIn ? <CreateEvent /> : <Navigate to="/login" />} />
             <Route path="/approve" element={isManager ? <ApproveEvent /> : <Navigate to="/" />} />
-            <Route path="/manage-users" element={isManager ? <ManageUsers /> : <Navigate to="/" />} /> {/* Add the new route */}
+            <Route path="/manage-users" element={isManager ? <ManageUsers /> : <Navigate to="/" />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
           </Routes>
         </main>

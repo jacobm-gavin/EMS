@@ -1,0 +1,71 @@
+.manage-users-container {
+  padding: 20px;
+}
+
+.manage-users-container h2 {
+  margin-bottom: 20px;
+}
+
+.manage-users-container input[type="text"],
+.manage-users-container input[type="password"] {
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.manage-users-container label {
+  margin-right: 10px;
+}
+
+.manage-users-container button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.manage-users-container button:hover {
+  background-color: #45a049;
+}
+
+.manage-users-container .delete-button {
+  background-color: #f44336;
+}
+
+.manage-users-container .delete-button:hover {
+  background-color: #d32f2f;
+}
+
+.manage-users-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.manage-users-container table th,
+.manage-users-container table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.manage-users-container table th {
+  background-color: #f2f2f2;
+}
+
+.manage-users-container table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.manage-users-container table tr:hover {
+  background-color: #ddd;
+}
+
+.manage-users-container .action-buttons button {
+  margin-right: 5px;
+}
