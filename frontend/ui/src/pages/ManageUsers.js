@@ -66,6 +66,9 @@ function ManageUsers() {
       body: JSON.stringify({ manager: managerStatus })
     })
       .then(response => response.json())
+      .then(data => {
+        fetchUsers(); // Refetch users after updating manager status
+      })
       .catch(error => console.error('Error updating manager status:', error))
       .finally(() => {
         fetchUsers(); // Refetch users after updating manager status
