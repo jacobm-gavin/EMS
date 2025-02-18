@@ -1,0 +1,34 @@
+version: '0.0.1'
+
+services:
+  db:
+    image: postgres:13
+    environment: 
+      PGDATA: /data
+      POSTGRES_DB: ems
+      POSTGRES_USER: LFAA
+      POSTGRES_PASSWORD: LFAAIFC
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/data
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://LFAA:LFAAIFC@db:5432/ems
+      SECRET_KEY: LFAAIFC2025
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    
+volumes:
+  postgres-data:
